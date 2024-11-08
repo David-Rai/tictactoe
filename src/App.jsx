@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React, { useEffect, useRef, useState } from 'react';
 =======
 <<<<<<< HEAD
@@ -7,10 +8,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import React, { useEffect, useRef, useState } from "react";
 >>>>>>> 12410de (second)
 >>>>>>> 9b79618 (sencodn)
+=======
+import React, { useEffect, useRef, useState } from "react";
+>>>>>>> e8415c5 (second)
 import { io } from "socket.io-client";
 
 const App = () => {
-  const [client] = useState(() => io("http://localhost:1111/")); // Only initialize once
+  const [client] = useState(() => io("http://localhost:1111/"));
   const [boxes, setBoxes] = useState(Array(9).fill(null));
   const [created, setCreated] = useState(false);
   const nameRef = useRef(null);
@@ -20,19 +24,23 @@ const App = () => {
   const [myRole, setMyRole] = useState("");
   const [turn, setTurn] = useState("x");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 =======
   const [winner, setWinner] = useState("");
 >>>>>>> 12410de (second)
 >>>>>>> 9b79618 (sencodn)
+=======
+  const [winner, setWinner] = useState("");
+>>>>>>> e8415c5 (second)
 
   useEffect(() => {
-    // on joined message
     client.on("joined-message", ({ message, rName }) => {
       setRoomName(rName);
     });
 
+<<<<<<< HEAD
     // getting opponent name
 <<<<<<< HEAD
     client.on('oponent-name', ({ name, role }) => {
@@ -43,6 +51,9 @@ const App = () => {
     client.on("oponent-name", ({ name, role }) => {
 >>>>>>> 12410de (second)
 >>>>>>> 9b79618 (sencodn)
+=======
+    client.on("oponent-name", ({ name, role }) => {
+>>>>>>> e8415c5 (second)
       setOName(name);
       setMyRole(role);
     });
@@ -51,6 +62,7 @@ const App = () => {
       setBoxes((prevBoxes) => {
         const newBoxes = [...prevBoxes];
         newBoxes[move] = mark;
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -74,10 +86,10 @@ const App = () => {
 <<<<<<< HEAD
 =======
 =======
+=======
+>>>>>>> e8415c5 (second)
 
-        // Check winner after updating boxes
         const winner = checkWinner(newBoxes);
-
         if (winner) {
           setWinner(`${winner} wins 🥳`);
         }
@@ -86,13 +98,16 @@ const App = () => {
       });
       setTurn(nextTurn);
     });
+<<<<<<< HEAD
 >>>>>>> 12410de (second)
 >>>>>>> 9b79618 (sencodn)
+=======
+>>>>>>> e8415c5 (second)
   }, [client]);
 
-  // JOINING THE ROOM
   const handleJoin = () => {
 <<<<<<< HEAD
+<<<<<<< HEAD
     setCreated(true);
     client.emit('join-room', { name: nameRef.current.value, id: client.id });
     setName(nameRef.current.value);
@@ -102,47 +117,47 @@ const App = () => {
     client.emit('join-room', { name: nameRef.current.value, id: client.id });
     setName(nameRef.current.value);
 =======
+=======
+>>>>>>> e8415c5 (second)
     if (nameRef.current.value) {
       setCreated(true);
       client.emit("join-room", { name: nameRef.current.value, id: client.id });
       setName(nameRef.current.value);
     }
+<<<<<<< HEAD
 >>>>>>> 12410de (second)
 >>>>>>> 9b79618 (sencodn)
+=======
+>>>>>>> e8415c5 (second)
   };
 
-  // MARKING THE BOX
   const handleMark = (index) => {
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 9b79618 (sencodn)
     if (boxes[index]) return; // If already marked, do nothing
 
+=======
+    if (winner || boxes[index]) return;
+>>>>>>> e8415c5 (second)
     if (turn === myRole) {
-      client.emit('move', {
-        move: index,
-        roomName,
-        turn
-      });
+      client.emit("move", { move: index, roomName, turn });
     }
   };
+<<<<<<< HEAD
   const checkWinner = () => {
 <<<<<<< HEAD
 =======
 =======
     if (winner) return;
     if (boxes[index]) return; // If already marked, do nothing
+=======
+>>>>>>> e8415c5 (second)
 
-    if (turn === myRole) {
-      client.emit("move", {
-        move: index,
-        roomName,
-        turn,
-      });
-    }
-  };
   const checkWinner = (boxes) => {
+<<<<<<< HEAD
 >>>>>>> 12410de (second)
 >>>>>>> 9b79618 (sencodn)
     // Check rows
@@ -221,30 +236,21 @@ const App = () => {
 
     // No winner found
     return null;
+=======
+    // Check rows, columns, and diagonals for a winner
+    // Similar to the logic you already have
+>>>>>>> e8415c5 (second)
   };
 
   return (
-    <main
-      className="h-screen w-full bg-gray-800 flex
-    flex-col
-    items-center justify-center"
-    >
+    <main className="h-screen w-full bg-gray-800 flex flex-col items-center justify-center">
       {created ? (
         <>
-          {/* GAMEBOARD */}
           <div className="w-[80%] h-[60px] flex items-center justify-between py-2 lg:w-[40%] md:w-[60%]">
-            <h1
-              className={`h-full w-[40%] rounded-md ${
-                turn === myRole ? " bg-purple-500" : "bg-purple-300"
-              }  text-slate-100 flex items-center justify-center`}
-            >
+            <h1 className="h-full w-[40%] rounded-md bg-purple-500 text-slate-100 flex items-center justify-center">
               {name}
             </h1>
-            <h1
-              className={`h-full w-[40%] rounded-md ${
-                turn !== myRole ? " bg-purple-500" : "bg-purple-300"
-              }  text-slate-100 flex items-center justify-center`}
-            >
+            <h1 className="h-full w-[40%] rounded-md bg-purple-300 text-slate-100 flex items-center justify-center">
               {Oname ? Oname : "waiting..."}
             </h1>
           </div>
@@ -255,12 +261,16 @@ const App = () => {
           )}
 
           <div className="h-[40vh] w-[50%] lg:w-[20%] p-2 flex flex-wrap items-center justify-evenly md:w-[40%]">
+<<<<<<< HEAD
 >>>>>>> 12410de (second)
 >>>>>>> 9b79618 (sencodn)
+=======
+>>>>>>> e8415c5 (second)
             {boxes.map((box, index) => (
               <button
                 key={index}
                 onClick={() => handleMark(index)}
+<<<<<<< HEAD
 <<<<<<< HEAD
                 className='h-[30%] w-[30%] bg-white'
 =======
@@ -270,11 +280,15 @@ const App = () => {
                 className="h-[30%] w-[30%] text-4xl bg-slate-300 rounded-md shadow-md flex items-center justify-center"
 >>>>>>> 12410de (second)
 >>>>>>> 9b79618 (sencodn)
+=======
+                className="h-[30%] w-[30%] text-4xl bg-slate-300 rounded-md shadow-md flex items-center justify-center"
+>>>>>>> e8415c5 (second)
               >
                 {box}
               </button>
             ))}
           </div>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -288,15 +302,12 @@ const App = () => {
 <<<<<<< HEAD
 =======
 =======
+=======
+>>>>>>> e8415c5 (second)
 
-          {/* WHOS TURN */}
           <p className="text-2xl text-slate-100">{winner}</p>
-        
-        {/* RESTART BUTTON */}
-
         </>
       ) : (
-        // IF NOT JOINED
         <div className="w-full flex flex-col items-center justify-between">
           <input
             type="text"
@@ -310,8 +321,11 @@ const App = () => {
           >
             PLAY
           </button>
+<<<<<<< HEAD
 >>>>>>> 12410de (second)
 >>>>>>> 9b79618 (sencodn)
+=======
+>>>>>>> e8415c5 (second)
         </div>
       )}
     </main>
