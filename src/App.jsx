@@ -97,7 +97,7 @@ const App = () => {
             type="text"
             placeholder="Enter your name"
             ref={nameRef}
-            className="w-[60%] px-3 h-[40px] rounded-md shadow-sm"
+            className="w-[60%] px-3 h-[40px] rounded-md shadow-sm md:w-[25%]"
           />
           <button
             onClick={handleJoin}
