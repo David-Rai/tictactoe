@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 
 const App = () => {
-  const [client] = useState(() => io("http://localhost:1111/"));
+  const [client] = useState(() => io("https://tictactoe-server-0bnf.onrender.com/"));
   const [boxes, setBoxes] = useState(Array(9).fill(null));
   const [created, setCreated] = useState(false);
   const nameRef = useRef(null);
