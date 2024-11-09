@@ -94,7 +94,7 @@ const App = () => {
             </h1>
           )}
 
-          <div className="h-[40vh] w-[50%] lg:w-[20%] p-2 flex flex-wrap items-center justify-evenly md:w-[40%]">
+          <div className="md:h-[40vh] h-[36vh] w-[50%] lg:w-[20%] p-2 flex flex-wrap items-center justify-evenly md:w-[40%]">
             {boxes.map((box, index) => (
               <button
                 key={index}
